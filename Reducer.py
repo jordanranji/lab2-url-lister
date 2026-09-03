@@ -30,11 +30,13 @@ for line in sys.stdin:
         current_count += count
     else:
         if current_word:
-            # write result to STDOUT
-            print('%s\t%s' % (current_word, current_count))
+            # write result to STDOUT IF the count is higher than 5
+            if current_count > 5:
+                print('%s\t%s' % (current_word, current_count))
         current_count = count
         current_word = word
             
 # do not forget to output the last word if needed!
 if current_word == word:
-    print('%s\t%s' % (current_word, current_count))
+    if current_count > 5:
+        print('%s\t%s' % (current_word, current_count))

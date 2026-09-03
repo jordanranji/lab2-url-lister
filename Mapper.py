@@ -1,19 +1,19 @@
 #!/usr/bin/env python
 """mapper.py"""
 
+# Jordan Ranji - CSCI 5253
+
 import sys
 
-# input comes from STDIN (standard input)
 for line in sys.stdin:
-    # remove leading and trailing whitespace
-    line = line.strip()
-    # split the line into words
-    words = line.split()
-    # increase counters
+    words = line.strip().split()
     for word in words:
-        # write the results to STDOUT (standard output);
-        # what we output here will be the input for the
-        # Reduce step, i.e. the input for reducer.py
-        #
-        # tab-delimited; the trivial word count is 1
-        print('%s\t%s' % (word, 1))
+        # Check if it starts with href=", then take everything inside the quotation marks if it does
+        # really simple url check, no http check or URL library used
+        if len(word) > 6:
+            if word[:6] == "href=\"":
+                cur_word = word[6:]
+                # find next quotation mark
+                quote_index = cur_word.find("\"")
+                url = cur_word[:quote_index] # keep everything before the last quotation mark
+                print('%s\t%s' % (url, 1))
